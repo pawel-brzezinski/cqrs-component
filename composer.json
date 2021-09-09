@@ -1,0 +1,36 @@
+{
+    "name": "pawel-brzezinski/cqrs-component",
+    "description": "Provides helpful classes and objects for the CQRS architecture.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Brzeziński",
+            "email": "pawel.brzezinski@smartint.pl"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^0.12.98",
+        "php": "^7.4|^8.0",
+        "beberlei/assert": "^3.3"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "^5.3",
+        "phpspec/prophecy-phpunit": "^2.0"
+    },
+    "suggest": {
+        "symfony/framework-bundle": "Needed to use controller abstrtacts for Symfony framework"
+    },
+    "autoload": {
+        "psr-4": {
+            "PB\\Component\\CQRS\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PB\\Component\\CQRS\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
