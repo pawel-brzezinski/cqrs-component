@@ -6,8 +6,8 @@ namespace PB\Component\CQRS\Tests\Mother\Domain\DateTime\ValueObject;
 
 use DateTimeZone;
 use PB\Component\CQRS\Domain\DateTime\ValueObject\DateTime;
-use PB\Component\CQRS\Tests\Helper\FakerTrait;
-use PB\Component\CQRS\Tests\Helper\Mother\SimpleValueObjectMother;
+use PB\Component\FirstAidTests\Faker\FakerTrait;
+use PB\Component\FirstAidTests\MotherObject\SimpleValueObjectMother;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>

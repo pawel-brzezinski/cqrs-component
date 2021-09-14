@@ -17,7 +17,7 @@
     "require-dev": {
         "broadway/broadway": "^2.4",
         "doctrine/dbal": "^3.1",
-        "fakerphp/faker": "^1.16",
+        "pawel-brzezinski/first-aid-tests-component": "dev-main",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12.98",
         "phpunit/phpunit": "^9.5",

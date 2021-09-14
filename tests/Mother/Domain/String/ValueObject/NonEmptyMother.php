@@ -6,8 +6,8 @@ namespace PB\Component\CQRS\Tests\Mother\Domain\String\ValueObject;
 
 use Assert\AssertionFailedException;
 use PB\Component\CQRS\Domain\String\ValueObject\NonEmpty;
-use PB\Component\CQRS\Tests\Helper\FakerTrait;
-use PB\Component\CQRS\Tests\Helper\Mother\SimpleValueObjectMother;
+use PB\Component\FirstAidTests\Faker\FakerTrait;
+use PB\Component\FirstAidTests\MotherObject\SimpleValueObjectMother;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
