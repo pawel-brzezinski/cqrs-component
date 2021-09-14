@@ -6,10 +6,12 @@ namespace PB\Component\CQRS\Tests\Command;
 
 use PB\Component\CQRS\Command\CommandBusInterface;
 use PB\Component\CQRS\Tests\Command\Fake\{FakeCommand, FakeCommandBus};
+use PB\Component\CQRS\Helper\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
+use ReflectionException;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
@@ -52,6 +54,18 @@ final class CommandBusTraitTest extends TestCase
         
         // When
         $this->createFakeCommandBus()->callExec($command);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testShouldCheckIfExecMethodIsProtected(): void
+    {
+        // When
+        $actual = ReflectionHelper::method(FakeCommandBus::class, 'exec');
+
+        // Then
+        $this->assertTrue($actual->isProtected());
     }
 
     #######
