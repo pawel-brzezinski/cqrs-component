@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PB\Component\CQRS\Tests\Assertions;
 
-use PB\Component\CQRS\Helper\ReflectionHelper;
+use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use ReflectionException;
 
 /**

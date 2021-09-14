@@ -6,10 +6,10 @@ namespace PB\Component\CQRS\Tests\Symfony\EventSubscriber\EventPublisher;
 
 use Broadway\Domain\DomainMessage;
 use Broadway\Domain\Metadata;
-use PB\Component\CQRS\Helper\ReflectionHelper;
 use PB\Component\CQRS\Symfony\EventSubscriber\EventPublisher\AsyncBroadwayEventPublisher;
 use PB\Component\CQRS\Symfony\Messenger\Bus\Event\MessengerBroadwayAsyncEventBus;
-use PB\Component\CQRS\Tests\Helper\Fake\FakeClass;
+use PB\Component\CQRS\Tests\Symfony\EventSubscriber\EventPublisher\Fake\FakeClass;
+use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -80,6 +80,7 @@ final class AsyncBroadwayEventPublisherTest extends TestCase
     {
         // Given
         $eventId1 = 'id-1';
+        
         $eventPayload1 = new FakeClass();
         $eventPlayhead1 = 1;
         $eventMetadata1 = new Metadata(['meta-1']);

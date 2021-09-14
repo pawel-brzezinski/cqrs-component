@@ -12,7 +12,8 @@
     "require": {
         "php": "^7.4|^8.0",
         "beberlei/assert": "^3.3",
-        "nesbot/carbon": "^2.53"
+        "nesbot/carbon": "^2.53",
+        "pawel-brzezinski/first-aid-component": "main-dev"
     },
     "require-dev": {
         "broadway/broadway": "^2.4",

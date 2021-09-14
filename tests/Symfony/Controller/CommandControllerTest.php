@@ -6,8 +6,8 @@ namespace PB\Component\CQRS\Tests\Symfony\Controller;
 
 use PB\Component\CQRS\Command\CommandBusInterface;
 use PB\Component\CQRS\Symfony\Controller\CommandController;
-use PB\Component\CQRS\Helper\ReflectionHelper;
 use PB\Component\CQRS\Tests\Symfony\Controller\Fake\FakeCommandController;
+use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;

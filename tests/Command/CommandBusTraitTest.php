@@ -6,7 +6,7 @@ namespace PB\Component\CQRS\Tests\Command;
 
 use PB\Component\CQRS\Command\CommandBusInterface;
 use PB\Component\CQRS\Tests\Command\Fake\{FakeCommand, FakeCommandBus};
-use PB\Component\CQRS\Helper\ReflectionHelper;
+use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;

@@ -6,8 +6,8 @@ namespace PB\Component\CQRS\Tests\Domain\String\ValueObject;
 
 use Assert\AssertionFailedException;
 use PB\Component\CQRS\Domain\String\ValueObject\Email;
-use PB\Component\CQRS\Helper\ReflectionHelper;
 use PB\Component\CQRS\Tests\Assertions\AssertObjectConstructor;
+use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
