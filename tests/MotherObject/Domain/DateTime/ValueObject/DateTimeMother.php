@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PB\Component\CQRS\Tests\Mother\Domain\DateTime\ValueObject;
+namespace PB\Component\CQRS\Tests\MotherObject\Domain\DateTime\ValueObject;
 
 use DateTimeZone;
 use PB\Component\CQRS\Domain\DateTime\ValueObject\DateTime;

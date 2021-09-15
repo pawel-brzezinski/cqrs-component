@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use PB\Component\CQRS\Domain\String\ValueObject\Email;
 use PB\Component\CQRS\Persistance\Doctrine\Types\EmailType;
 use PB\Component\CQRS\Tests\Assertions\Domain\String\ValueObject\AssertEmailValueObject;
-use PB\Component\CQRS\Tests\Mother\Domain\String\ValueObject\EmailMother;
+use PB\Component\CQRS\Tests\MotherObject\Domain\String\ValueObject\EmailMother;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;

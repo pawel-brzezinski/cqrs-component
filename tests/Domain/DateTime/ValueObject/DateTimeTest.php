@@ -9,7 +9,7 @@ use Carbon\Exceptions\InvalidFormatException;
 use Exception;
 use PB\Component\CQRS\Domain\DateTime\Exception\DateTimeException;
 use PB\Component\CQRS\Domain\DateTime\ValueObject\DateTime;
-use PB\Component\CQRS\Tests\Mother\Domain\DateTime\ValueObject\DateTimeMother;
+use PB\Component\CQRS\Tests\MotherObject\Domain\DateTime\ValueObject\DateTimeMother;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 

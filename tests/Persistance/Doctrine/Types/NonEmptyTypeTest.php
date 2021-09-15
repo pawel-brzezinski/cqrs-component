@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use PB\Component\CQRS\Domain\String\ValueObject\NonEmpty;
 use PB\Component\CQRS\Persistance\Doctrine\Types\NonEmptyType;
 use PB\Component\CQRS\Tests\Assertions\Domain\String\ValueObject\AssertNonEmptyValueObject;
-use PB\Component\CQRS\Tests\Mother\Domain\String\ValueObject\NonEmptyMother;
+use PB\Component\CQRS\Tests\MotherObject\Domain\String\ValueObject\NonEmptyMother;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;

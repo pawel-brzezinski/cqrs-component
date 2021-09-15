@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PB\Component\CQRS\Tests\Mother\Domain\String\ValueObject;
+namespace PB\Component\CQRS\Tests\MotherObject\Domain\String\ValueObject;
 
 use Assert\AssertionFailedException;
 use PB\Component\CQRS\Domain\String\ValueObject\Email;

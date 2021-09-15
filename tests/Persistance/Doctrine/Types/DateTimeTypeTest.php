@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use PB\Component\CQRS\Domain\DateTime\ValueObject\DateTime as DateTimeValueObject;
 use PB\Component\CQRS\Persistance\Doctrine\Types\DateTimeType;
 use PB\Component\CQRS\Tests\Assertions\Domain\DateTime\ValueObject\AssertDateTimeValueObject;
-use PB\Component\CQRS\Tests\Mother\Domain\DateTime\ValueObject\DateTimeMother;
+use PB\Component\CQRS\Tests\MotherObject\Domain\DateTime\ValueObject\DateTimeMother;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
