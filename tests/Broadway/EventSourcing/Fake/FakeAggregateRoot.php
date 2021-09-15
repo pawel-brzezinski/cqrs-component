@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PB\Component\CQRS\Tests\Broadway\EventSourcing\Fake;
 
-use Broadway\EventSourcing\EventSourcedAggregateRoot;
+use PB\Component\CQRS\Broadway\EventSourcing\BroadwayAggregateRoot;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class FakeAggregateRoot extends EventSourcedAggregateRoot
+final class FakeAggregateRoot extends BroadwayAggregateRoot
 {
     private int $id;
 
@@ -30,6 +30,15 @@ final class FakeAggregateRoot extends EventSourcedAggregateRoot
         $self->id = $id;
 
         return $self;
+    }
+
+    /**
+     *
+     */
+    public function delete(): void
+    {
+        // Should be applied by domain event
+        $this->markedAsDeleted = true;
     }
 
     /**
