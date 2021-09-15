@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Tests\Broadway\Repository;
 
 use Broadway\EventHandling\EventBus;
-use Broadway\EventSourcing\AggregateFactory\PublicConstructorAggregateFactory;
+use Broadway\EventSourcing\AggregateFactory\ReflectionAggregateFactory;
 use Broadway\EventSourcing\EventStreamDecorator;
 use Broadway\EventStore\EventStore;
 use PB\Component\CQRS\Tests\Broadway\EventSourcing\Fake\FakeAggregateRoot;
@@ -87,7 +87,7 @@ final class BroadwayStoreTest extends TestCase
         $this->assertSame($this->eventStoreMock->reveal(), ReflectionHelper::findPropertyValue($actual, 'eventStore'));
         $this->assertSame($this->eventBusMock->reveal(), ReflectionHelper::findPropertyValue($actual, 'eventBus'));
         $this->assertSame(FakeAggregateRoot::class, ReflectionHelper::findPropertyValue($actual, 'aggregateClass'));
-        $this->assertInstanceOf(PublicConstructorAggregateFactory::class, ReflectionHelper::findPropertyValue($actual, 'aggregateFactory'));
+        $this->assertInstanceOf(ReflectionAggregateFactory::class, ReflectionHelper::findPropertyValue($actual, 'aggregateFactory'));
         $this->assertSame($eventStreamDecorators, ReflectionHelper::findPropertyValue($actual, 'eventStreamDecorators'));
     }
 

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Broadway\Repository;
 
 use Broadway\EventHandling\EventBus;
-use Broadway\EventSourcing\AggregateFactory\PublicConstructorAggregateFactory;
-use Broadway\EventSourcing\{EventSourcingRepository, EventStreamDecorator};
+use Broadway\EventSourcing\{AggregateFactory\ReflectionAggregateFactory, EventSourcingRepository, EventStreamDecorator};
 use Broadway\EventStore\EventStore;
 
 /**
@@ -30,7 +29,7 @@ abstract class BroadwayStore extends EventSourcingRepository
             $eventStore,
             $eventBus,
             $aggregateClass,
-            new PublicConstructorAggregateFactory(),
+            new ReflectionAggregateFactory(),
             $eventStreamDecorators
         );
     }
