@@ -25,7 +25,8 @@
         "phpmetrics/phpmetrics": "^2.7",
         "symfony/amqp-messenger": "^5.3",
         "symfony/console": "^5.3",
-        "symfony/framework-bundle": "^5.3"
+        "symfony/framework-bundle": "^5.3",
+        "ramsey/uuid": "^4.2"
     },
     "suggest": {
         "broadway/broadway": "Needed to use Broadway buses and handlers",
