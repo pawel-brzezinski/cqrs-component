@@ -29,6 +29,18 @@ final class EmailMother extends SimpleValueObjectMother
     }
 
     /**
+     * @param string $value
+     *
+     * @return Email
+     *
+     * @throws AssertionFailedException
+     */
+    public static function create(string $value): Email
+    {
+        return self::randomWith(['value' => $value]);
+    }
+
+    /**
      * @return string
      */
     protected static function getClass(): string

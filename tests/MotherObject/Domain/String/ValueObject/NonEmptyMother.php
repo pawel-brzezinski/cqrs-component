@@ -29,6 +29,18 @@ final class NonEmptyMother extends SimpleValueObjectMother
     }
 
     /**
+     * @param string $value
+     *
+     * @return NonEmpty
+     *
+     * @throws AssertionFailedException
+     */
+    public static function create(string $value): NonEmpty
+    {
+        return self::randomWith(['value' => $value]);
+    }
+
+    /**
      * @return string
      */
     protected static function getClass(): string
