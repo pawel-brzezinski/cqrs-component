@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PB\Component\CQRS\Command;
+namespace PB\Component\CQRS\Query;
 
 use Throwable;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-interface CommandBusInterface
+interface QueryBusInterface
 {
     /**
-     * @param CommandInterface $command
+     * @param QueryInterface $query
      *
      * @throws Throwable
      */
-    public function handle(CommandInterface $command): void;
+    public function handle(QueryInterface $query): void;
 }

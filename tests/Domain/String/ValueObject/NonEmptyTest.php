@@ -177,4 +177,24 @@ final class NonEmptyTest extends TestCase
     #######
     # End #
     #######
+
+    ######################
+    # NonEmpty::assert() #
+    ######################
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testShouldCheckIfAssertMethodIsProtected(): void
+    {
+        // When
+        $actual = ReflectionHelper::method(NonEmpty::class, 'assert');
+
+        // Then
+        $this->assertTrue($actual->isProtected());
+    }
+
+    #######
+    # End #
+    #######
 }

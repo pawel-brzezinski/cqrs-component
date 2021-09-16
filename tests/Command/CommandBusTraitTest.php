@@ -12,6 +12,7 @@ use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use ReflectionException;
+use Throwable;
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
@@ -43,6 +44,9 @@ final class CommandBusTraitTest extends TestCase
     # CommandBusTrait::exec() #
     ###########################
 
+    /**
+     * @throws Throwable
+     */
     public function testShouldExecTraitMethodAndCheckIfCommandBusHandleMethodHasBeenCalled(): void
     {
         // Given
