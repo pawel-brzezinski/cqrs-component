@@ -14,7 +14,9 @@ interface QueryBusInterface
     /**
      * @param QueryInterface $query
      *
+     * @return mixed
+     *
      * @throws Throwable
      */
-    public function handle(QueryInterface $query): void;
+    public function handle(QueryInterface $query);
 }
