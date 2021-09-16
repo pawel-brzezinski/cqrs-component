@@ -6,7 +6,7 @@ namespace PB\Component\CQRS\Symfony\Messenger\Bus\Event;
 
 use Broadway\Domain\DomainMessage;
 use PB\Component\CQRS\Broadway\Bus\Event\BroadwayAsyncEventBusInterface;
-use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusExceptionTrait;
+use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusException;
 use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -17,8 +17,6 @@ use Throwable;
  */
 class MessengerBroadwayAsyncEventBus implements BroadwayAsyncEventBusInterface
 {
-    use MessageBusExceptionTrait;
-
     private MessageBusInterface $messageBus;
 
     /**
@@ -41,7 +39,7 @@ class MessengerBroadwayAsyncEventBus implements BroadwayAsyncEventBusInterface
                 new AmqpStamp($command->getType()),
             ]);
         } catch (HandlerFailedException $exception) {
-            $this->throwException($exception);
+            throw (new MessageBusException($exception))->getPrevious();
         }
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PB\Component\CQRS\Symfony\Messenger\Bus\Query;
 
+use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusException;
 use PB\Component\CQRS\Query\{QueryBusInterface, QueryInterface};
-use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusExceptionTrait;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -16,8 +16,6 @@ use Throwable;
  */
 class MessengerBusQuery implements QueryBusInterface
 {
-    use MessageBusExceptionTrait;
-
     private MessageBusInterface $messageBus;
 
     /**
@@ -43,10 +41,9 @@ class MessengerBusQuery implements QueryBusInterface
             /** @var HandledStamp $stamp */
             $stamp = $envelope->last(HandledStamp::class);
         } catch (HandlerFailedException $exception) {
-            $this->throwException($exception);
+            throw (new MessageBusException($exception))->getPrevious();
         }
-
-        /** @noinspection PhpUndefinedVariableInspection */
-        return $stamp->getResult(); /** @phpstan-ignore-line */
+        
+        return $stamp->getResult();
     }
 }

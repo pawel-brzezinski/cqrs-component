@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Symfony\Messenger\Bus\Command;
 
 use PB\Component\CQRS\Command\{CommandBusInterface, CommandInterface};
-use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusExceptionTrait;
+use PB\Component\CQRS\Symfony\Messenger\Bus\Exception\MessageBusException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
@@ -15,8 +15,6 @@ use Throwable;
  */
 class MessengerBusCommand implements CommandBusInterface
 {
-    use MessageBusExceptionTrait;
-
     private MessageBusInterface $messageBus;
 
     /**
@@ -37,7 +35,7 @@ class MessengerBusCommand implements CommandBusInterface
         try {
             $this->messageBus->dispatch($command);
         } catch (HandlerFailedException $exception) {
-            $this->throwException($exception);
+            throw (new MessageBusException($exception))->getPrevious();
         }
     }
 }
