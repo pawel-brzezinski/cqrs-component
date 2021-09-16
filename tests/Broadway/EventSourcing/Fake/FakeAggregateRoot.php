@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Tests\Broadway\EventSourcing\Fake;
 
 use PB\Component\CQRS\Broadway\EventSourcing\BroadwayAggregateRoot;
+use PB\Component\CQRS\Tests\Broadway\EventSourcing\Fake\Event\{
+    FakeAggregateRootWasCreated,
+    FakeAggregateRootWasDeleted,
+    FakeAggregateRootWasTested
+};
 
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
@@ -12,6 +17,8 @@ use PB\Component\CQRS\Broadway\EventSourcing\BroadwayAggregateRoot;
 final class FakeAggregateRoot extends BroadwayAggregateRoot
 {
     private int $id;
+
+    private bool $wasTested = false;
 
     /**
      *
@@ -26,8 +33,7 @@ final class FakeAggregateRoot extends BroadwayAggregateRoot
     public static function create(int $id): self
     {
         $self = new self();
-        // Should be applied by domain event
-        $self->id = $id;
+        $self->apply(new FakeAggregateRootWasCreated($id));
 
         return $self;
     }
@@ -37,8 +43,7 @@ final class FakeAggregateRoot extends BroadwayAggregateRoot
      */
     public function delete(): void
     {
-        // Should be applied by domain event
-        $this->markedAsDeleted = true;
+        $this->apply(new FakeAggregateRootWasDeleted($this->id));
     }
 
     /**
@@ -47,5 +52,45 @@ final class FakeAggregateRoot extends BroadwayAggregateRoot
     public function getAggregateRootId(): string
     {
         return 'fake-aggregate-'.$this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function id(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function wasTested(): bool
+    {
+        return $this->wasTested;
+    }
+
+    /**
+     * @param FakeAggregateRootWasCreated $event
+     */
+    protected function applyFakeAggregateRootWasCreated(FakeAggregateRootWasCreated $event): void
+    {
+        $this->id = $event->id;
+    }
+
+    /**
+     * @param FakeAggregateRootWasDeleted $event
+     */
+    protected function applyFakeAggregateRootWasDeleted(FakeAggregateRootWasDeleted $event): void
+    {
+        $this->markedAsDeleted = true;
+    }
+
+    /**
+     * @param FakeAggregateRootWasTested $event
+     */
+    protected function applyFakeAggregateRootWasTested(FakeAggregateRootWasTested $event): void
+    {
+        $this->wasTested = true;
     }
 }
