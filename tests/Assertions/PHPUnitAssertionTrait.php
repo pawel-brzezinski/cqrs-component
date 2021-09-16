@@ -27,4 +27,10 @@ trait PHPUnitAssertionTrait
      * @param string $message
      */
     abstract public static function assertNotNull($actual, string $message = ''): void;
+
+    /**
+     * @param mixed $condition
+     * @param string $message
+     */
+    abstract public static function assertTrue($condition, string $message = ''): void;
 }
