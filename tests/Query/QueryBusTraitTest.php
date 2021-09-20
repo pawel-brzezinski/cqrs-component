@@ -10,7 +10,7 @@ use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use Prophecy\Prophecy\{MethodProphecy, ObjectProphecy};
 use ReflectionException;
 use Throwable;
 
@@ -47,17 +47,23 @@ final class QueryBusTraitTest extends TestCase
     /**
      * @throws Throwable
      */
-    public function testShouldExecTraitMethodAndCheckIfCommandBusHandleMethodHasBeenCalled(): void
+    public function testShouldCallAskTraitMethodAndCheckIfQueryBusHandleMethodHasBeenCalledAndResultHasBeenReturned(): void
     {
         // Given
         $query = new FakeQuery(100);
+        $expected = 'query-bus-result';
 
         // Mock QueryBusInterface::handle()
-        $this->queryBusMock->handle(Argument::is($query))->shouldBeCalledTimes(1);
+        /** @var MethodProphecy $methodProp */
+        $methodProp = $this->queryBusMock->handle(Argument::is($query));
+        $methodProp->shouldBeCalledTimes(1)->willReturn($expected);
         // End
         
         // When
-        $this->createFakeQueryBus()->callAsk($query);
+        $actual = $this->createFakeQueryBus()->callAsk($query);
+
+        // Then
+        $this->assertSame($expected, $actual);
     }
 
     /**

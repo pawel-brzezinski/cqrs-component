@@ -24,11 +24,13 @@ final class FakeQueryBus
 
     /**
      * @param QueryInterface $query
+     * 
+     * @return mixed
      *
      * @throws Throwable
      */
-    public function callAsk(QueryInterface $query): void
+    public function callAsk(QueryInterface $query)
     {
-        $this->ask($query);
+        return $this->ask($query);
     }
 }

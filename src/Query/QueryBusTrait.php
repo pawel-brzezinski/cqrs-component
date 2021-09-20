@@ -17,9 +17,11 @@ trait QueryBusTrait
      * @param QueryInterface $query
      *
      * @throws Throwable
+     * 
+     * @return mixed
      */
-    protected function ask(QueryInterface $query): void
+    protected function ask(QueryInterface $query)
     {
-        $this->queryBus->handle($query);
+        return $this->queryBus->handle($query);
     }
 }
