@@ -9,6 +9,9 @@ namespace PB\Component\CQRS\Domain\String\ValueObject\Password;
  */
 abstract class AbstractHashedPassword
 {
+    protected const MIN_LENGTH = 8;
+    protected const MAX_LENGTH = 4096;
+
     protected string $hashedPassword;
 
     /**
@@ -18,6 +21,13 @@ abstract class AbstractHashedPassword
     {
         $this->hashedPassword = $hashedPassword;
     }
+
+    /**
+     * @param string $hashedPassword
+     *
+     * @return bool
+     */
+    abstract public static function rehash(string $hashedPassword): bool;
 
     /**
      * @param string $plainPassword
@@ -39,6 +49,16 @@ abstract class AbstractHashedPassword
         return new static($hashedPassword);
     }
 
+    /**
+     * @param string $plainPassword
+     *
+     * @return bool
+     */
+    abstract public function match(string $plainPassword): bool;
+
+    /**
+     * @return string
+     */
     public function toString(): string
     {
         return $this->hashedPassword;
@@ -51,13 +71,6 @@ abstract class AbstractHashedPassword
     {
         return $this->hashedPassword;
     }
-
-    /**
-     * @param string $plainPassword
-     *
-     * @return bool
-     */
-    abstract public function match(string $plainPassword): bool;
 
     /**
      * @param string $plainPassword

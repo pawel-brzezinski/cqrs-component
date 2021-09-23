@@ -13,10 +13,16 @@ use SodiumException;
  */
 final class SodiumHashedPassword extends AbstractHashedPassword
 {
-    private const MIN_LENGTH = 8;
-
     private const MEMORY_LIMIT = 67108864;
     private const OPS_LIMIT = 2;
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function rehash(string $hashedPassword): bool
+    {
+        return sodium_crypto_pwhash_str_needs_rehash($hashedPassword, self::OPS_LIMIT, self::MEMORY_LIMIT);
+    }
 
     /**
      * {@inheritDoc}
@@ -40,6 +46,7 @@ final class SodiumHashedPassword extends AbstractHashedPassword
      */
     protected static function hash(string $plainPassword): string
     {
+        Assertion::maxLength($plainPassword, self::MAX_LENGTH);
         Assertion::password($plainPassword, self::MIN_LENGTH);
 
         /** @noinspection PhpComposerExtensionStubsInspection */

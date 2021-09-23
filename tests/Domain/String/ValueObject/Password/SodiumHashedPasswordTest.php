@@ -45,16 +45,21 @@ final class SodiumHashedPasswordTest extends TestCase
     public function encodeDataProvider(): array
     {
         // Dataset 1
-        $plainPassword1 = 'AsDe12%6';
+        $plainPassword1 = file_get_contents(__DIR__.'/assets/valid_4096_chars.txt');
         $expectAssertionError1 = false;
 
         // Dataset 2
-        $plainPassword2 = 'NoTVaLiD';
+        $plainPassword2 = file_get_contents(__DIR__.'/assets/not_valid_4096_chars.txt');
         $expectAssertionError2 = true;
+
+        // Dataset 3
+        $plainPassword3 = file_get_contents(__DIR__.'/assets/valid_4097_chars.txt');
+        $expectAssertionError3 = true;
 
         return [
             'plain password is valid' => [$plainPassword1, $expectAssertionError1],
-            'plain password is not valid' => [$plainPassword2, $expectAssertionError2],
+            'plain password is not valid - missing special chars' => [$plainPassword2, $expectAssertionError2],
+            'plain password is not valid - string is too long' => [$plainPassword3, $expectAssertionError3],
         ];
     }
 
@@ -114,6 +119,50 @@ final class SodiumHashedPasswordTest extends TestCase
     # End #
     #######
 
+    ##################################
+    # SodiumHashedPassword::rehash() #
+    ##################################
+
+    /**
+     * @return array
+     *
+     * @throws SodiumException
+     */
+    public function rehashDataProvider(): array
+    {
+        // Dataset 1
+        $hashedPassword1 = sodium_crypto_pwhash_str('Password-1', 2, 67108864);
+        $expected1 = false;
+
+        // Dataset 2
+        $hashedPassword2 = sodium_crypto_pwhash_str('Password-2', 2, 67108863);
+        $expected2 = true;
+
+        return [
+            'password not need rehash' => [$hashedPassword1, $expected1],
+            'password need rehash - options not match' => [$hashedPassword2, $expected2],
+        ];
+    }
+
+    /**
+     * @dataProvider rehashDataProvider
+     *
+     * @param string $hashedPassword
+     * @param bool $expected
+     */
+    public function testShouldCallRehashStaticMethodAndCheckIfReturnedFlagIsCorrect(string $hashedPassword, bool $expected): void
+    {
+        // When
+        $actual = SodiumHashedPassword::rehash($hashedPassword);
+
+        // Then
+        $this->assertSame($expected, $actual);
+    }
+
+    #######
+    # End #
+    #######
+
     #################################
     # SodiumHashedPassword::match() #
     #################################
@@ -148,7 +197,7 @@ final class SodiumHashedPasswordTest extends TestCase
      *
      * @throws SodiumException
      */
-    public function testShouldCallMatchMethodAndUseMagicToStringMethodToCheckIfPlainPasswordHasBeenHashedAndSetCorrectly(
+    public function testShouldCallMatchMethodAndCheckIfReturnedFlagIsCorrect(
         string $orgPlainPassword,
         string $plainPassword,
         bool $expected
