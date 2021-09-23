@@ -27,16 +27,18 @@
         "symfony/amqp-messenger": "^5.3",
         "symfony/console": "^5.3",
         "symfony/framework-bundle": "^5.3",
+        "symfony/password-hasher": "^5.3",
         "ramsey/uuid": "^4.2"
     },
     "suggest": {
         "ext-sodium": "Needs to use Sodium hash value object",
         "broadway/broadway": "Needed to use Broadway buses and handlers",
         "doctrine/dbal": "Needed to use Doctrine DBAL types based on domain value objects",
-        "symfony/framework-bundle": "Needed to use controller abstrtacts for Symfony framework",
         "symfony/amqp-messenger": "Needed to use Messenger buses and handlers (with AMQP)",
         "symfony/console": "Needed to use Symfony event subscribers",
-        "symfony/messenger": "Needed to use Messenger buses and handlers (without AMQP)"
+        "symfony/framework-bundle": "Needed to use controller abstrtacts for Symfony framework",
+        "symfony/messenger": "Needed to use Messenger buses and handlers (without AMQP)",
+        "symfony/password-hasher": "Needed to use password hashers based on hash value objects"
     },
     "autoload": {
         "psr-4": {
