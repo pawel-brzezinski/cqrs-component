@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Tests\Domain\String\ValueObject\Password;
 
 use Assert\AssertionFailedException;
-use PB\Component\CQRS\Domain\String\ValueObject\Password\BcryptHashedPassword;
+use PB\Component\CQRS\Domain\String\ValueObject\Password\Argon2IHashedPassword;
 use PB\Component\CQRS\Tests\Assertions\AssertObjectConstructor;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -13,13 +13,13 @@ use ReflectionException;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class BcryptHashedPasswordTest extends TestCase
+final class Argon2IHashedPasswordTest extends TestCase
 {
     use AssertObjectConstructor;
 
-    #######################################
-    # BcryptHashedPassword::__construct() #
-    #######################################
+    ########################################
+    # Argon2IHashedPassword::__construct() #
+    ########################################
 
     /**
      * @throws ReflectionException
@@ -27,16 +27,16 @@ final class BcryptHashedPasswordTest extends TestCase
     public function testShouldCheckIfValueObjectConstructorIsNotPublic(): void
     {
         // Then
-        $this->assertConstructorIsNotPublic(BcryptHashedPassword::class);
+        $this->assertConstructorIsNotPublic(Argon2IHashedPassword::class);
     }
 
     #######
     # End #
     #######
 
-    ##################################
-    # BcryptHashedPassword::encode() #
-    ##################################
+    ###################################
+    # Argon2IHashedPassword::encode() #
+    ###################################
 
     /**
      * @return array
@@ -74,8 +74,9 @@ final class BcryptHashedPasswordTest extends TestCase
 
         // Given
 
+
         // When
-        $actual = BcryptHashedPassword::encode($plainPassword);
+        $actual = Argon2IHashedPassword::encode($plainPassword);
 
         // Then
         if (false === $expectAssertionError) {
@@ -87,9 +88,9 @@ final class BcryptHashedPasswordTest extends TestCase
     # End #
     #######
 
-    ####################################
-    # BcryptHashedPassword::fromHash() #
-    ####################################
+    #####################################
+    # Argon2IHashedPassword::fromHash() #
+    #####################################
 
     /**
      *
@@ -98,10 +99,14 @@ final class BcryptHashedPasswordTest extends TestCase
     {
         // Given
         $plainPass = 'Some-correct-password-123-%';
-        $hashedPass = password_hash($plainPass, PASSWORD_BCRYPT, ['cost' => 12]);
+        $hashedPass = password_hash($plainPass, PASSWORD_ARGON2I, [
+            'memory_cost' => 65536,
+            'threads' => 1,
+            'time_cost' => 4,
+        ]);
 
         // When
-        $actual = BcryptHashedPassword::fromHash($hashedPass);
+        $actual = Argon2IHashedPassword::fromHash($hashedPass);
         
         // Then
         $this->assertTrue(password_verify($plainPass, (string)$actual));
@@ -111,9 +116,9 @@ final class BcryptHashedPasswordTest extends TestCase
     # End #
     #######
 
-    #################################
-    # BcryptHashedPassword::match() #
-    #################################
+    ##################################
+    # Argon2IHashedPassword::match() #
+    ##################################
 
     /**
      * @return array
@@ -149,7 +154,7 @@ final class BcryptHashedPasswordTest extends TestCase
         bool $expected
     ): void {
         // Given
-        $valueObjectUnderTest = BcryptHashedPassword::encode($orgPlainPassword);
+        $valueObjectUnderTest = Argon2IHashedPassword::encode($orgPlainPassword);
 
         // When
         $actual = $valueObjectUnderTest->match($plainPassword);
@@ -162,9 +167,9 @@ final class BcryptHashedPasswordTest extends TestCase
     # End #
     #######
 
-    ####################################
-    # BcryptHashedPassword::toString() #
-    ####################################
+    #####################################
+    # Argon2IHashedPassword::toString() #
+    #####################################
 
     /**
      *
@@ -175,7 +180,7 @@ final class BcryptHashedPasswordTest extends TestCase
         $plainPass = 'Some-correct-password-456-%';
 
         // When
-        $actual = BcryptHashedPassword::encode($plainPass)->toString();
+        $actual = Argon2IHashedPassword::encode($plainPass)->toString();
 
         // Then
         $this->assertTrue(password_verify($plainPass, $actual));
