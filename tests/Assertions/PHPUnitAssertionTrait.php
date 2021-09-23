@@ -33,4 +33,10 @@ trait PHPUnitAssertionTrait
      * @param string $message
      */
     abstract public static function assertTrue($condition, string $message = ''): void;
+
+    /**
+     * @param mixed $condition
+     * @param string $message
+     */
+    abstract public static function assertFalse($condition, string $message = ''): void;
 }
