@@ -16,6 +16,7 @@
         "pawel-brzezinski/first-aid-component": "main-dev"
     },
     "require-dev": {
+        "ext-sodium": "*",
         "broadway/broadway": "^2.4",
         "doctrine/dbal": "^3.1",
         "pawel-brzezinski/first-aid-tests-component": "dev-main",
@@ -29,6 +30,7 @@
         "ramsey/uuid": "^4.2"
     },
     "suggest": {
+        "ext-sodium": "Needs to use Sodium hash value object",
         "broadway/broadway": "Needed to use Broadway buses and handlers",
         "doctrine/dbal": "Needed to use Doctrine DBAL types based on domain value objects",
         "symfony/framework-bundle": "Needed to use controller abstrtacts for Symfony framework",

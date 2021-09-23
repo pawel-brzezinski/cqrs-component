@@ -11,6 +11,8 @@ use PB\Component\FirstAid\Assertion\Assertion;
  */
 abstract class AbstractNativeHashedPassword extends AbstractHashedPassword
 {
+    private const MIN_LENGTH = 8;
+
     /**
      * @param string $plainPassword
      *
@@ -36,7 +38,7 @@ abstract class AbstractNativeHashedPassword extends AbstractHashedPassword
      */
     protected static function hash(string $plainPassword): string
     {
-        Assertion::password($plainPassword, static::MIN_LENGTH);
+        Assertion::password($plainPassword, self::MIN_LENGTH);
 
         return password_hash($plainPassword, static::getAlgorithm(), static::getAlgorithmOptions());
     }

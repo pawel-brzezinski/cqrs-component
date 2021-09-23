@@ -9,8 +9,6 @@ namespace PB\Component\CQRS\Domain\String\ValueObject\Password;
  */
 abstract class AbstractHashedPassword
 {
-    protected const MIN_LENGTH = 8;
-    
     protected string $hashedPassword;
 
     /**
