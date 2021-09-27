@@ -18,13 +18,14 @@ trait AssertSodiumHashedPasswordValueObject
     /**
      * Asserts SodiumHashedPassword value object.
      *
-     * @param SodiumHashedPassword $expected
+     * @param string $expectedPlainPassword
      * @param SodiumHashedPassword $actual
      * 
      * @throws SodiumException
      */
-    public function assertSodiumHashedPasswordValueObject(SodiumHashedPassword $expected, SodiumHashedPassword $actual): void
+    public function assertSodiumHashedPasswordValueObject(string $expectedPlainPassword, SodiumHashedPassword $actual): void
     {
-        $this->assertTrue($expected->match($actual->toString()));
+        $this->assertTrue($actual->match($expectedPlainPassword));
+        $this->assertFalse(SodiumHashedPassword::rehash($actual->toString()));
     }
 }

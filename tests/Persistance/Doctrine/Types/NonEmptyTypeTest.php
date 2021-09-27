@@ -169,7 +169,7 @@ final class NonEmptyTypeTest extends TestCase
         $value3 = 'Non empty 3';
         $expected3 = NonEmptyMother::randomWith(['value' => $value3]);
 
-        // Dataset 5
+        // Dataset 4
         $value4 = '';
         $expected4 = null;
         $expectedExceptionMessage4 = "Could not convert database value \"\" to Doctrine Type non_empty. Expected format: non-empty string";

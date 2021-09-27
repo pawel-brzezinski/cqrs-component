@@ -17,11 +17,12 @@ trait AssertBcryptHashedPasswordValueObject
     /**
      * Asserts BcryptHashedPassword value object.
      *
-     * @param BcryptHashedPassword $expected
+     * @param string $expectedPlainPassword
      * @param BcryptHashedPassword $actual
      */
-    public function assertBcryptHashedPasswordValueObject(BcryptHashedPassword $expected, BcryptHashedPassword $actual): void
+    public function assertBcryptHashedPasswordValueObject(string $expectedPlainPassword, BcryptHashedPassword $actual): void
     {
-        $this->assertTrue($expected->match($actual->toString()));
+        $this->assertTrue($actual->match($expectedPlainPassword));
+        $this->assertFalse(BcryptHashedPassword::rehash($actual->toString()));
     }
 }

@@ -17,11 +17,12 @@ trait AssertArgon2IDHashedPasswordValueObject
     /**
      * Asserts Argon2IDHashedPassword value object.
      *
-     * @param Argon2IDHashedPassword $expected
+     * @param string $expectedPlainPassword
      * @param Argon2IDHashedPassword $actual
      */
-    public function assertArgon2IDHashedPasswordValueObject(Argon2IDHashedPassword $expected, Argon2IDHashedPassword $actual): void
+    public function assertArgon2IDHashedPasswordValueObject(string $expectedPlainPassword, Argon2IDHashedPassword $actual): void
     {
-        $this->assertTrue($expected->match($actual->toString()));
+        $this->assertTrue($actual->match($expectedPlainPassword));
+        $this->assertFalse(Argon2IDHashedPassword::rehash($actual->toString()));
     }
 }
