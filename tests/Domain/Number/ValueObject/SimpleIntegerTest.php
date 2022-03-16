@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Tests\Domain\Number\ValueObject;
 
 use Assert\AssertionFailedException;
-use PB\Component\CQRS\Domain\Number\ValueObject\Integer;
+use PB\Component\CQRS\Domain\Number\ValueObject\SimpleInteger;
 use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -14,11 +14,11 @@ use TypeError;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class IntegerTest extends TestCase
+final class SimpleIntegerTest extends TestCase
 {
-    #####################
-    # Integer::create() #
-    #####################
+    ###########################
+    # SimpleInteger::create() #
+    ###########################
 
     /**
      * @return array
@@ -55,7 +55,7 @@ final class IntegerTest extends TestCase
 
         // Given
 
-        $voUnderTest = Integer::create($value);
+        $voUnderTest = SimpleInteger::create($value);
 
         // When
         $actual = ReflectionHelper::getPropertyValue($voUnderTest, 'value');
@@ -70,9 +70,9 @@ final class IntegerTest extends TestCase
     # End #
     #######
 
-    ###################
-    # Integer::dump() #
-    ###################
+    #########################
+    # SimpleInteger::dump() #
+    #########################
 
     /**
      * @return void
@@ -85,7 +85,7 @@ final class IntegerTest extends TestCase
         $value = 10;
         
         // When
-        $actual = Integer::create($value)->dump();
+        $actual = SimpleInteger::create($value)->dump();
         
         // Then
         $this->assertSame($value, $actual);

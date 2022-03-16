@@ -9,7 +9,7 @@ use Assert\{Assertion, AssertionFailedException};
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class PositiveInteger extends Integer
+final class PositiveInteger extends SimpleInteger
 {
     private const ASSERT_LIMIT = 0;
     private const ASSERT_MESSAGE = 'Value of PositiveInteger object must be greater than 0.';

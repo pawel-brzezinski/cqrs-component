@@ -9,7 +9,7 @@ use Assert\AssertionFailedException;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-class Integer
+class SimpleInteger
 {
     private int $value;
 
