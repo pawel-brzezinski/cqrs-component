@@ -63,7 +63,7 @@ final class PositiveIntegerType extends IntegerType
         }
 
         try {
-            return PositiveInteger::create($value);
+            return PositiveInteger::create((int) $value);
         } catch (Throwable $exception) {
             throw ConversionException::conversionFailedFormat($value, $this->getName(), 'integer greater than 0');
         }

@@ -166,8 +166,8 @@ final class PositiveIntegerTypeTest extends TestCase
         $expected2 = $value2;
 
         // Dataset 3
-        $value3 = 3;
-        $expected3 = PositiveIntegerMother::randomWith(['value' => $value3]);
+        $value3 = "3";
+        $expected3 = PositiveIntegerMother::randomWith(['value' => 3]);
 
         // Dataset 4
         $value4 = 0;
@@ -177,7 +177,7 @@ final class PositiveIntegerTypeTest extends TestCase
         return [
             'value is null' => [$value1, $expected1, null],
             'value is PositiveInteger value object instance' => [$value2, $expected2, null],
-            'value is positive integer' => [$value3, $expected3, null],
+            'value is positive integer as string' => [$value3, $expected3, null],
             'value is not positive integer' => [$value4, $expected4, $expectedExceptionMessage4],
         ];
     }
