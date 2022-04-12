@@ -24,17 +24,19 @@
         "phpstan/phpstan": "^0.12.98",
         "phpunit/phpunit": "^9.5",
         "phpmetrics/phpmetrics": "^2.7",
+        "ramsey/uuid": "^4.2",
         "symfony/amqp-messenger": "^5.3",
         "symfony/console": "^5.3",
+        "symfony/doctrine-messenger": "^5.4",
         "symfony/framework-bundle": "^5.3",
-        "symfony/password-hasher": "^5.3",
-        "ramsey/uuid": "^4.2"
+        "symfony/password-hasher": "^5.3"
     },
     "suggest": {
         "ext-sodium": "Needs to use Sodium hash value object",
         "broadway/broadway": "Needed to use Broadway buses and handlers",
         "doctrine/dbal": "Needed to use Doctrine DBAL types based on domain value objects",
         "symfony/amqp-messenger": "Needed to use Messenger buses and handlers (with AMQP)",
+        "symfony/doctrine-messenger": "Needed to use Messenger buses and handlers (with Doctrine)",
         "symfony/console": "Needed to use Symfony event subscribers",
         "symfony/framework-bundle": "Needed to use controller abstrtacts for Symfony framework",
         "symfony/messenger": "Needed to use Messenger buses and handlers (without AMQP)",
