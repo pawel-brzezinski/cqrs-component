@@ -10,7 +10,7 @@ use Assert\AssertionFailedException;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class Boolean
+final class Flag
 {
     private const ASSERTION_MSG = 'Value "%s" is not valid boolean value.';
 

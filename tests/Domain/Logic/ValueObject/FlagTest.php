@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PB\Component\CQRS\Tests\Domain\Logic\ValueObject;
 
 use Assert\AssertionFailedException;
-use PB\Component\CQRS\Domain\Logic\ValueObject\Boolean;
+use PB\Component\CQRS\Domain\Logic\ValueObject\Flag;
 use PB\Component\FirstAid\Reflection\ReflectionHelper;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -13,11 +13,11 @@ use ReflectionException;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@db-team.pl>
  */
-final class BooleanTest extends TestCase
+final class FlagTest extends TestCase
 {
-    ########################
-    # Boolean::fromValue() #
-    ########################
+    #####################
+    # Flag::fromValue() #
+    #####################
 
     /**
      * @return array
@@ -64,7 +64,7 @@ final class BooleanTest extends TestCase
         }
 
         // When
-        $actual = Boolean::fromValue($value);
+        $actual = Flag::fromValue($value);
 
         // Then
         $this->assertSame($expected, ReflectionHelper::getPropertyValue($actual, 'value'));
@@ -74,9 +74,9 @@ final class BooleanTest extends TestCase
     # End #
     #######
 
-    ###################
-    # Boolean::dump() #
-    ###################
+    ################
+    # Flag::dump() #
+    ################
 
     /**
      * @return void
@@ -86,7 +86,7 @@ final class BooleanTest extends TestCase
     public function testShouldCallDumpMethodAndCheckIfReturnedBooleanIsCorrect(): void
     {
         // When
-        $actual = Boolean::fromValue(true);
+        $actual = Flag::fromValue(true);
 
         // Then
         $this->assertTrue($actual->dump());
