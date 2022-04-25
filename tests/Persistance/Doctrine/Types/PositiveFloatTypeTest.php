@@ -7,10 +7,10 @@ namespace PB\Component\CQRS\Tests\Persistance\Doctrine\Types;
 use Assert\AssertionFailedException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
-use PB\Component\CQRS\Domain\String\ValueObject\Email;
-use PB\Component\CQRS\Persistance\Doctrine\Types\EmailType;
-use PB\Component\CQRS\Tests\Assertions\Domain\String\ValueObject\AssertEmailValueObject;
-use PB\Component\CQRS\Tests\MotherObject\Domain\String\ValueObject\EmailMother;
+use PB\Component\CQRS\Domain\Number\ValueObject\PositiveFloat;
+use PB\Component\CQRS\Persistance\Doctrine\Types\PositiveFloatType;
+use PB\Component\CQRS\Tests\Assertions\Domain\Number\ValueObject\AssertPositiveFloatValueObject;
+use PB\Component\CQRS\Tests\MotherObject\Domain\Number\ValueObject\PositiveFloatMother;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -18,9 +18,9 @@ use Prophecy\Prophecy\ObjectProphecy;
 /**
  * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
-final class EmailTypeTest extends TestCase
+final class PositiveFloatTypeTest extends TestCase
 {
-    use AssertEmailValueObject;
+    use AssertPositiveFloatValueObject;
     use ProphecyTrait;
 
     /** @var ObjectProphecy|AbstractPlatform|null */
@@ -42,29 +42,29 @@ final class EmailTypeTest extends TestCase
         $this->platformMock = null;
     }
 
-    ########################
-    # EmailType::getName() #
-    ########################
+    ################################
+    # PositiveFloatType::getName() #
+    ################################
 
     /**
      *
      */
-    public function testShouldCallGetNameMethodAndCheckIfReturnedStringIsCorrectEmailType(): void
+    public function testShouldCallGetNameMethodAndCheckIfReturnedStringIsCorrectNonEmptyType(): void
     {
         // When
         $actual = $this->createType()->getName();
 
         // Then
-        $this->assertSame('email', $actual);
+        $this->assertSame('positive_float', $actual);
     }
 
     #######
     # End #
     #######
 
-    #######################################
-    # EmailType::requiresSQLCommentHint() #
-    #######################################
+    ###############################################
+    # PositiveFloatType::requiresSQLCommentHint() #
+    ###############################################
 
     /**
      *
@@ -82,9 +82,9 @@ final class EmailTypeTest extends TestCase
     # End #
     #######
 
-    #######################################
-    # EmailType::convertToDatabaseValue() #
-    #######################################
+    ###############################################
+    # PositiveFloatType::convertToDatabaseValue() #
+    ###############################################
 
     /**
      * @return array
@@ -98,17 +98,17 @@ final class EmailTypeTest extends TestCase
         $expected1 = null;
 
         // Dataset 2
-        $value2 = EmailMother::randomWith(['value' => 'user-1@example.com']);
-        $expected2 = 'user-1@example.com';
+        $value2 = PositiveFloatMother::randomWith(['value' => 2.2]);
+        $expected2 = 2.2;
 
         // Dataset 3
         $value3 = 'not supported value';
         $expected3 = null;
-        $expectedExceptionMessage3 = "Could not convert PHP value 'not supported value' to type email. Expected one of the following types: null, PB\Component\CQRS\Domain\String\ValueObject\Email";
+        $expectedExceptionMessage3 = "Could not convert PHP value 'not supported value' to type positive_float. Expected one of the following types: null, PB\Component\CQRS\Domain\Number\ValueObject\PositiveFloat";
 
         return [
             'value is null' => [$value1, $expected1, null],
-            'value is Email instance' => [$value2, $expected2, null],
+            'value is PositiveFloat instance' => [$value2, $expected2, null],
             'value is not expected type' => [$value3, $expected3, $expectedExceptionMessage3],
         ];
     }
@@ -117,12 +117,10 @@ final class EmailTypeTest extends TestCase
      * @dataProvider convertToDatabaseValueDataProvider
      *
      * @param mixed $value
-     * @param string|null $expected
-     * @param string|null $expectedExceptionMessage
      */
-    public function testShouldCallConvertToDatabaseValueMethodAndCheckIfReturnedValueIsExpectedEmailString(
+    public function testShouldCallConvertToDatabaseValueMethodAndCheckIfReturnedValueIsExpectedPositiveFloatValue(
         $value,
-        ?string $expected,
+        ?float $expected,
         ?string $expectedExceptionMessage
     ): void {
         // Expect
@@ -146,9 +144,9 @@ final class EmailTypeTest extends TestCase
     # End #
     #######
 
-    ##################################
-    # EmailType::convertToPHPValue() #
-    ##################################
+    ##########################################
+    # PositiveFloatType::convertToPHPValue() #
+    ##########################################
 
     /**
      * @return array
@@ -162,23 +160,23 @@ final class EmailTypeTest extends TestCase
         $expected1 = null;
 
         // Dataset 2
-        $value2 = EmailMother::randomWith(['value' => 'user-2@example.com']);
+        $value2 = PositiveFloatMother::randomWith(['value' => 22.2]);
         $expected2 = $value2;
 
         // Dataset 3
-        $value3 = 'user-3@example.com';
-        $expected3 = EmailMother::randomWith(['value' => $value3]);
+        $value3 = "3.3";
+        $expected3 = PositiveFloatMother::randomWith(['value' => 3.3]);
 
-        // Dataset 5
-        $value4 = '';
+        // Dataset 4
+        $value4 = 0;
         $expected4 = null;
-        $expectedExceptionMessage4 = "Could not convert database value \"\" to Doctrine Type email. Expected format: email string";
+        $expectedExceptionMessage4 = "Could not convert database value \"0\" to Doctrine Type positive_float. Expected format: float greater than 0";
 
         return [
             'value is null' => [$value1, $expected1, null],
-            'value is Email value object instance' => [$value2, $expected2, null],
-            'value is email string' => [$value3, $expected3, null],
-            'value is empty string' => [$value4, $expected4, $expectedExceptionMessage4],
+            'value is PositiveFloat value object instance' => [$value2, $expected2, null],
+            'value is positive float as string' => [$value3, $expected3, null],
+            'value is not positive float' => [$value4, $expected4, $expectedExceptionMessage4],
         ];
     }
 
@@ -186,12 +184,10 @@ final class EmailTypeTest extends TestCase
      * @dataProvider convertToPHPValueDataProvider
      *
      * @param mixed $value
-     * @param Email|null $expected
-     * @param string|null $expectedExceptionMessage
      */
-    public function testShouldCallConvertToPHPValueMethodAndCheckIfReturnedValueIsExpectedEmailValueObject(
+    public function testShouldCallConvertToPHPValueMethodAndCheckIfReturnedValueIsExpectedPositiveIntegerValueObject(
         $value,
-        ?Email $expected,
+        ?PositiveFloat $expected,
         ?string $expectedExceptionMessage
     ): void {
         // Expect
@@ -207,7 +203,7 @@ final class EmailTypeTest extends TestCase
 
         // Then
         if (null === $expectedExceptionMessage) {
-            $this->assertEmailValueObjectOrNull($expected, $actual);
+            $this->assertPositiveFloatValueObjectOrNull($expected, $actual);
         }
     }
 
@@ -216,10 +212,10 @@ final class EmailTypeTest extends TestCase
     #######
 
     /**
-     * @return EmailType
+     * @return PositiveFloatType
      */
-    private function createType(): EmailType
+    private function createType(): PositiveFloatType
     {
-        return new EmailType();
+        return new PositiveFloatType();
     }
 }

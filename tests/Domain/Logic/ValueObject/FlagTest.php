@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
 /**
- * @author Paweł Brzeziński <pawel.brzezinski@db-team.pl>
+ * @author Paweł Brzeziński <pawel.brzezinski@smartint.pl>
  */
 final class FlagTest extends TestCase
 {
