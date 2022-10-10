@@ -30,7 +30,7 @@ final class DateTimeMother extends SimpleValueObjectMother
     protected static function getDefaultConstructorArguments(): array
     {
         $dateTime = self::getFaker()->dateTime();
-        $timezone = new DateTimeZone('Europe/Warsaw');
+        $timezone = new DateTimeZone('UTC');
 
         return [
             'datetime' => $dateTime->format('Y-m-d H:i:s'),
